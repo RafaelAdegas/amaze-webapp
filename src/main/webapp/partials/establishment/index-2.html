@@ -1,0 +1,125 @@
+<md-content layout-padding class="custom-md-content">
+	<h3 class="md-title">Meu Local</h3>
+	<div class="md-operation-toolbar" layout="row" layout-sm="column" layout-align="left left" layout-wrap>
+		<!-- save -->
+		  <md-button class="md-fab md-mini md-primary" aria-label="Salvar"   
+	  	  	ng-click="actionSave()" tabindex="0" ng-show="editMode">
+	          <md-icon md-svg-src="images/icons/save.svg" ></md-icon>
+	       	<md-tooltip>
+	          Salvar
+	        </md-tooltip>
+	      </md-button>
+		<!-- edit -->
+	  	  <md-button class="md-fab md-mini md-primary" aria-label="Editar"
+	  	  	ng-click="actionEdit();" tabindex="0" ng-show="!editMode">
+	          <md-icon md-svg-src="images/icons/edit.svg" ></md-icon>
+        	<md-tooltip>
+	          Editar
+	        </md-tooltip>
+	      </md-button>
+		<!-- cancel -->
+		 <md-button class="md-fab md-mini md-primary" aria-label="Cancelar"
+		 	ng-click="actionCancel()" tabindex="0" ng-show="editMode">
+		   <md-icon md-svg-icon="images/icons/cancel.svg"></md-icon>
+		   <md-tooltip>
+		     Cancelar
+		   </md-tooltip>
+		</md-button>
+	</div>
+	
+	<div>
+		<md-card>
+			<md-card-content class="md-padding">
+			<!--md-whiteframe class="md-whiteframe-z3" layout
+				layout-align="center center" style="padding: 20px; backgroung-color: white"-->
+				<form name="projectForm" style="width:100%">
+					<div layout>
+						<md-input-container flex> <label>Nome</label> <input
+							md-maxlength="30" maxlength="30" name="shortName" required
+							ng-model="establishment.shortName" ng-disabled="!editMode">
+						<div ng-messages="projectForm.shortName.$error">
+							<div ng-message="required">Este campo é obrigatório.</div>
+						</div>
+						</md-input-container>
+						<md-input-container flex> <label>Fantasia</label>
+						<input md-maxlength="60" maxlength="60" name="fullName" required
+							ng-model="establishment.fullName" ng-disabled="!editMode">
+						<div ng-messages="projectForm.fullName.$error">
+							<div ng-message="required">Este campo é obrigatório.</div>
+						</div>
+						</md-input-container>
+					</div>
+				
+					<md-divider ng-if="!editMode"></md-divider>
+				
+					<div layout layout-sm="column">
+						<md-input-container flex> <label>Telefone</label>
+						<input md-maxlength="30" maxlength="30" name="phone" required
+							ng-model="establishment.phone" ng-disabled="!editMode">
+						<div ng-messages="projectForm.phone.$error">
+							<div ng-message="required">Este campo é obrigatório.</div>
+						</div>
+						</md-input-container>
+						<md-input-container flex> <label>CNPJ</label> <input
+							md-maxlength="20" maxlength="20" name="cnpj" required
+							ng-model="establishment.cnpj" ng-disabled="!editMode">
+						<div ng-messages="projectForm.cnpj.$error">
+							<div ng-message="required">Este campo é obrigatório.</div>
+						</div>
+						</md-input-container>
+					</div>
+				
+					<md-divider ng-if="!editMode"></md-divider>
+					
+					<md-input-container flex style="width:100px"> <label>Cep</label> <input
+						required md-maxlength="10" maxlength="10" name="cep"
+						ng-model="establishment.cep" ng-disabled="!editMode">
+					<div ng-messages="projectForm.cep.$error">
+						<div ng-message="required">Este campo é obrigatório.</div>
+					</div>
+					</md-input-container>
+				
+					<md-divider ng-if="!editMode" style="width: 150px;"></md-divider>
+				
+					<md-input-container> <label>Endereço</label> <input
+						required md-maxlength="60" maxlength="60" name="address"
+						ng-model="establishment.address" ng-disabled="!editMode">
+					<div ng-messages="projectForm.address.$error">
+						<div ng-message="required">Este campo é obrigatório.</div>
+					</div>
+					</md-input-container>
+				
+					<md-divider ng-if="!editMode"></md-divider>
+				
+					<div layout layout-sm="column">
+						<md-input-container flex> <label>Cidade</label> <input
+							required md-maxlength="30" maxlength="30" name="city"
+							ng-model="establishment.city" ng-disabled="!editMode">
+						<div ng-messages="projectForm.city.$error">
+							<div ng-message="required">Este campo é obrigatório.</div>
+						</div>
+						</md-input-container>
+						<md-input-container flex> <label>Estado</label> <input
+							required md-maxlength="2" maxlength="2" name="state"
+							ng-model="establishment.state" ng-disabled="!editMode">
+						<div ng-messages="projectForm.state.$error">
+							<div ng-message="required">Este campo é obrigatório.</div>
+						</div>
+						</md-input-container>
+					</div>
+				
+					<md-divider ng-if="!editMode"></md-divider>
+				
+					<md-input-container> <label>Complemento</label> <input
+						required md-maxlength="90" maxlength="90" required name="complement"
+						ng-model="establishment.complement" ng-disabled="!editMode">
+					<div ng-messages="projectForm.complement.$error">
+						<div ng-message="required">Este campo é obrigatório.</div>
+					</div>
+					</md-input-container>
+				</form>
+			<!--/md-whiteframe-->
+			</md-card-content>
+		</md-card>
+	</div>
+</md-content>

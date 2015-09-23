@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+			http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<context:annotation-config />
+
+	<!--
+		DATABASE SETUP 
+	 -->
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="username" value="root" />
+		<property name="password" value="" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://127.0.0.1/amaze" />
+	</bean>
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="persistenceUnitName" value="znAdminPU" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="generateDdl" value="true" />
+				<property name="showSql" value="true" />
+				<property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<bean id="userEao" class="io.redshoes.zoone.admin.eao.user.JpaUserEao"/>
+	
+	<bean id="beaconEao" class="io.redshoes.zoone.admin.eao.beacon.JpaBeaconEao"/>
+	
+	<bean id="establishmentEao" class="io.redshoes.zoone.admin.eao.establishment.JpaEstablishmentEao"/>
+	 
+	<bean id="dataBaseInitializer" class="io.redshoes.zoone.admin.eao.DataBaseInitializer" init-method="initDataBase">
+		<constructor-arg ref="userEao" />
+		<constructor-arg ref="establishmentEao" />
+		<constructor-arg ref="beaconEao" />
+		<constructor-arg ref="passwordEncoder" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!--
+		INIT REST COMPONENTS 
+	 -->
+	
+	<context:component-scan base-package="io.redshoes.zoone.web.rest.resources" />
+	
+	<bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
+	
+	<!-- 
+		SPRING SECURITY SETUP
+	-->
+	
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder">
+		<constructor-arg value="ThisIsASecretSoChangeMe" />
+	</bean>
+	
+	<security:authentication-manager id="authenticationManager">
+		<security:authentication-provider user-service-ref="userEao">
+			<security:password-encoder ref="passwordEncoder"></security:password-encoder>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+	<security:http
+			realm="Protected API"
+			use-expressions="true"
+			auto-config="false"
+			create-session="stateless"
+			entry-point-ref="unauthorizedEntryPoint"
+			authentication-manager-ref="authenticationManager">
+		<security:custom-filter ref="authenticationTokenProcessingFilter" position="FORM_LOGIN_FILTER" />
+		<security:intercept-url pattern="/rest/user/authenticate" access="" />
+		<security:intercept-url pattern="/rest/user" access="" />
+			
+		<!-- BEACON URI's auth -->
+			<security:intercept-url method="GET" pattern="/rest/beacons/**" access="hasRole('admin')" />
+			<security:intercept-url method="PUT" pattern="/rest/beacons/**" access="hasRole('admin')" />
+			<security:intercept-url method="POST" pattern="/rest/beacons/**" access="hasRole('admin')" />
+			<security:intercept-url method="DELETE" pattern="/rest/beacons/**" access="hasRole('admin')" />
+					
+		<!-- USER URI's auth -->
+			<security:intercept-url method="GET" pattern="/rest/users/**" access="hasRole('admin')" />
+			<security:intercept-url method="PUT" pattern="/rest/users/**" access="hasRole('admin')" />
+			<security:intercept-url method="POST" pattern="/rest/users/**" access="" />
+			<security:intercept-url method="DELETE" pattern="/rest/users/**" access="hasRole('admin')" />
+			<security:intercept-url pattern="/rest/users/validate" access="" />
+		
+		<!-- SYSTEM CONFIGURATIONS auth -->
+			<security:intercept-url pattern="/rest/sysconfig/**" access="hasRole('admin')"/>
+			
+		<!-- ESTABLISHMENT URI's auth -->
+			<security:intercept-url method="GET" pattern="/rest/establishments/**" access="hasRole('admin')" />
+			<security:intercept-url method="PUT" pattern="/rest/establishments/**" access="hasRole('admin')" />
+			<security:intercept-url method="POST" pattern="/rest/establishments/**" access="hasRole('admin')" />
+			<security:intercept-url method="DELETE" pattern="/rest/establishments/**" access="hasRole('admin')" />
+			
+		<!-- SYSTEM ADMIN URI's auth -->
+			<security:intercept-url method="GET" pattern="/rest/systemadmin/**" access="hasRole('admin')" />
+			<security:intercept-url method="PUT" pattern="/rest/systemadmin/**" access="hasRole('admin')" />
+			<security:intercept-url method="POST" pattern="/rest/systemadmin/**" access="hasRole('admin')" />
+			<security:intercept-url method="DELETE" pattern="/rest/systemadmin/**" access="hasRole('admin')" />
+			
+		<!-- IMAGE UPLOAD URI's auth -->
+			<security:intercept-url method="POST" pattern="/rest/imageupload/**" access="hasRole('admin')" />
+			
+	</security:http>
+
+	<bean id="unauthorizedEntryPoint" class="io.redshoes.zoone.web.rest.UnauthorizedEntryPoint" />
+
+	<bean class="io.redshoes.zoone.web.rest.AuthenticationTokenProcessingFilter" id="authenticationTokenProcessingFilter">
+		<constructor-arg ref="userEao" />
+	</bean>
+
+</beans>

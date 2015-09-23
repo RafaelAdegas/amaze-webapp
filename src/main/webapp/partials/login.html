@@ -1,0 +1,42 @@
+<div class="column">
+	<img ng-src="images/background.jpg" class="md-card-image" alt="Washed Out" style="width: 100%">
+	<md-content layout-padding class="login-form">
+    	<form name="loginForm">
+		 <!-- user name -->
+    	  <md-input-container style="padding: 2px 2px 10px">
+	        <label>Login</label>
+	        <input name="username" ng-model="username" required>
+	        <div ng-messages="loginForm.username.$error">
+	          <div ng-message="required">Campo obrigatório.</div>
+	        </div>
+	      </md-input-container>
+		<!-- password -->
+    	  <md-input-container style="padding: 2px 2px 10px">
+	        <label>Senha</label>
+	        <input type="password" name="password" ng-model="password" required>
+	        <div ng-messages="loginForm.password.$error">
+	          <div ng-message="required">Campo obrigatório.</div>
+	        </div>
+	      </md-input-container>
+		<!-- remember & login -->
+	      <section layout="row" layout-sm="column" layout-wrap>
+	    	  <md-input-container style="padding: 2px 2px 10px">
+		        <md-checkbox ng-model="rememberMe">
+		        	Lembrar-me
+		        </md-checkbox>
+		      </md-input-container>
+		      <md-button class="md-fab md-mini" ng-click="login()" aria-label="Login" style="float:right; position:absolute; right:5px;">
+		      	<md-icon md-svg-src="images/icons/next.svg" style="color: greenyellow;"></md-icon>
+		      	<md-tooltip>
+		          Entrar
+		        </md-tooltip>
+		      </md-button>
+	      </section>
+	      
+   		<!-- message invalid user -->
+	      <section layout="row" layout-sm="column" layout-wrap ng-show="messageInvalidUser">
+	    	  <p style="color: red">Usuário ou senha inválidos!</p>
+	      </section>
+		</form>
+	</md-content> <!-- end panel panel-default -->
+</div>

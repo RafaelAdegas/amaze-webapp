@@ -1,0 +1,101 @@
+<div >
+	<md-card>
+		<md-card-content class="md-padding">
+			<md-tabs md-dynamic-height md-border-bottom md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}">
+			  <md-tab id="tab1" ng-show="selectedBeacon == undefined">
+			  	<md-tab-label>Todos os Beacons</md-tab-label>
+			  	<md-tab-body>
+			       <md-data-table-container>
+			         <table md-data-table class="md-primary" md-progress="deferred">
+			           <thead md-order="query.order" md-trigger="onorderchange">
+			             <tr>
+			               <th></th>
+			               <th order-by="major" name="Major"></th>
+			               <th order-by="minor" name="Minor"></th>
+			               <th order-by="description" name="Descrição"></th>
+			               <th order-by="locale" name="Localização"></th>
+			               <th order-by="locale" name="uuid"></th>
+			             </tr>
+			           </thead>
+			           <tbody>
+			             <tr ng-repeat="beacon in beacons | orderBy: query.order | limitTo: query.limit: (query.page - 1) * query.limit" 
+			             	ng-click="selectBeacon(beacon)" ng-dblclick="actionEdit()" ng-class="{'md-selected': selected === beacon}" style="cursor: pointer">
+			               <td><md-checkbox aria-label="Beacon" ng-checked="selected===beacon"></md-checkbox></td>
+			               <td>{{beacon.major}}</td>
+			               <td>{{beacon.minor}}</td>
+			               <td>{{beacon.description}}</td>
+			               <td>{{beacon.locale}}</td>
+			               <td>{{beacon.uuid</td>
+			             </tr>
+			           </tbody>
+			         </table>
+			       </md-data-table-container>
+			
+			       <md-data-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{beacons.length}}" md-trigger="onpagechange"></md-data-table-pagination>
+			  	</md-tab-body>
+			  </md-tab>
+			  
+			  <md-tab id="tab2" ng-disabled="data.secondLocked">
+			    <md-tab-label>Detalhes</md-tab-label>
+				    <md-tab-body>
+				      <div layout="column">
+				      	<form name="beaconForm">
+					      	<md-content layout-padding>
+					      		 <md-input-container  style="width:60%">
+						            <label>UUID (Identificador UUID)</label>
+						            <input name="uuid" ng-model="beacon.uuid" ng-disabled="!isNewOperation" required>
+						            <div ng-messages="beaconForm.uuid.$error">
+							          <div ng-message="required">O campo 'UUI ID' é obrigatório!</div>
+							        </div>
+						          </md-input-container>
+						          
+						          <div layout="row">
+							          <md-input-container  style="width:30%">
+							            <label>Major ID</label>
+							            <input name="major" ng-model="beacon.major" ng-disabled="!isNewOperation" required>
+							            <div ng-messages="beaconForm.major.$error">
+								          <div ng-message="required">O campo 'Major ID' é obrigatório!</div>
+								        </div>
+							          </md-input-container>
+							          
+							          <md-input-container  style="width:30%">
+							            <label>Minor ID</label>
+							            <input name="minor" ng-model="beacon.minor" ng-disabled="!isNewOperation" required>
+							            <div ng-messages="beaconForm.minor.$error">
+								          <div ng-message="required">O campo 'Minor ID' é obrigatório!</div>
+								        </div>
+							          </md-input-container>
+							     </div>
+							          
+						         <md-input-container  style="width:60%">
+						            <label>Descrição (O que este Beacon fará)</label>
+						            <input name="description" ng-model="beacon.description" maxlength="60" md-maxlength="60" required>
+						            <div ng-messages="beaconForm.description.$error">
+							          <div ng-message="required">O campo 'Descrição' é obrigatório!</div>
+							        </div>
+						          </md-input-container>
+						          
+						          <md-input-container  style="width:60%">
+						            <label>Localização (Onde este Beacon está)</label>
+						            <input name="locale" ng-model="beacon.locale" maxlength="60" md-maxlength="60" required>
+						            <div ng-messages="beaconForm.locale.$error">
+							          <div ng-message="required">O campo 'Localização' é obrigatório!</div>
+							        </div>
+						          </md-input-container>
+						        
+							 </md-content>
+						</form>
+				      </div>
+				    </md-tab-body>
+			  </md-tab>
+			  <md-tab id="tab3" ng-disabled="true">
+			    <md-tab-label>Interação</md-tab-label>
+			    <md-tab-body>
+			      View for Item #3 <br/>
+			      data.selectedIndex = 2;
+			    </md-tab-body>
+			  </md-tab>
+			</md-tabs>
+		</md-card-content>
+	</md-card>
+</div>

@@ -1,0 +1,43 @@
+<md-content layout-padding class="custom-md-content">
+	<h3 class="md-title">Beacons </h3>
+	<div class="md-operation-toolbar" layout="row" layout-sm="column" layout-align="left left" layout-wrap>
+	  <!-- add new 
+	  	  <md-button class="md-fab md-mini md-primary" aria-label="Add new Beacon"
+	  	  	ng-click="actionAddNew();" tabindex="0">
+	          <md-icon md-svg-src="images/icons/addNew.svg" ></md-icon>
+        	<md-tooltip>
+	          Novo
+	        </md-tooltip>
+	      </md-button>-->
+	      
+	  <!-- edit -->
+	  	  <md-button class="md-fab md-mini md-primary" aria-label="Add new Beacon"
+	  	  	ng-click="actionEdit();" tabindex="0" ng-disabled="!showEdit()">
+	          <md-icon md-svg-src="images/icons/edit.svg" ></md-icon>
+        	<md-tooltip>
+	          Editar
+	        </md-tooltip>
+	      </md-button>
+	      
+	  
+	  <!-- cancel -->
+		 <md-button class="md-fab md-mini md-primary" aria-label="Cancelar"
+		 	ng-click="actionCancel()" tabindex="0" ng-disabled="!editMode">
+		   <md-icon md-svg-icon="images/icons/cancel.svg"></md-icon>
+		   <md-tooltip>
+		     Cancelar
+		   </md-tooltip>
+		</md-button>
+		
+	  <!-- save -->
+	  	  <md-button class="md-fab md-mini md-primary" aria-label="Save Beacon"   
+	  	  	ng-click="actionSave()" tabindex="0" ng-disabled="!editMode">
+	          <md-icon md-svg-src="images/icons/save.svg" ></md-icon>
+	       	<md-tooltip>
+	          Salvar
+	        </md-tooltip>
+	      </md-button>
+	</div>
+	
+	<ng-include src="'partials/beacons/form.html'"></ng-include>
+</md-content>
