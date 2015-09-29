@@ -1,10 +1,11 @@
 var app = angular.module('znAngularApp', ['ngRoute', 
+                                        'chart.js',
                                         'ngCookies',
                                         'ngMaterial',
+                                        'znAngularApp.establishmentService',
                                         'znAngularApp.directives',
                                         'znAngularApp.services',
                                         'homeCtrl',
-                                        'znAngularApp.establishmentService',
                                         'beaconsCtrl',
                                         'znAngularApp.beaconService',
                                         'usersCtrl',
@@ -23,7 +24,7 @@ app.controller('AppCtrl', function ($scope,
 		$mdSidenav(menuId).toggle();
 	};
 	
-	$rootScope.menuSelected = 'dashboard';
+	$rootScope.menuSelected = 'home';
 
 	$rootScope.redirect = function(url, refresh) {
 	    if(refresh || $scope.$$phase) {
@@ -76,12 +77,6 @@ app.config(
 			$routeProvider.when('/login', {
 				templateUrl: 'partials/login.html',
 				controller: LoginController
-			});
-	
-			$routeProvider.when('/dashboard', {
-				templateUrl:'partials/dashboard.html',
-				controller: 'HomeCtrl'
-				
 			});
 			
 			$routeProvider.when('/beacons', {
@@ -218,7 +213,7 @@ function LoginController($scope, $rootScope, $location, $cookieStore, UserServic
 						$rootScope.user = user;
 						$location.path("/");
 					});
-					$rootScope.menuSelected = 'dashboard';
+					$rootScope.menuSelected = 'home';
 				}
 		});
 	};

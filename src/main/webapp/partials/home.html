@@ -1,35 +1,107 @@
-
-
 <div class="row">
 
-		<div 
-		donut-chart
-		donut-data='[
-		    {label: "Download Sales", value: 12},
-		    {label: "In-Store Sales",value: 30},
-		    {label: "Mail-Order Sales", value: 20}
-		]'
-		donut-colors='["#31C0BE","#c7254e","#98a0d3"]'
-		donut-formatter='"currency"'>
+	<div class="col-lg-6 col-sm-12 ng-scope" id="doughnut-chart">
+		<div class="panel panel-default">
+			<div class="panel-heading">Acessos Mensais</div>
+			<div class="panel-body">
+				<div class="chart-container">
+					<canvas id="bar" class="chart chart-bar" chart-colours="colours"
+					  chart-data="data" chart-labels="labels"  width="522" height="250">
+					</canvas>
+				</div>
+			</div>
 		</div>
-		
-		<div 
-		bar-chart 
-		bar-data='[
-		    { y: "2006", a: 100, b: 90 },
-		    { y: "2007", a: 75,  b: 65 },
-		    { y: "2008", a: 50,  b: 40 },
-		    { y: "2009", a: 75,  b: 65 },
-		    { y: "2010", a: 50,  b: 40 },
-		    { y: "2011", a: 75,  b: 65 },
-		    { y: "2012", a: 100, b: 90 }
-		]'
-		bar-x='y'
-		bar-y='["a", "b"]'
-		bar-labels='["Series A", "Series B"]'
-		bar-colors='["#31C0BE", "#c7254e"]'>
-		</div>
-</div>
+	</div>
 	
-<div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col md-grid">
+	<div class="col-lg-6 col-sm-12 ng-scope" id="doughnut-chart">
+		<div class="panel panel-default">
+			<div class="panel-heading">Acesso dos últimos 7 dias</div>
+			<div class="panel-body">
+				<div class="chart-container">
+					<canvas id="line" class="chart chart-line" chart-data="data0" chart-colours="colours0"
+					  chart-labels="labels0" chart-series="series0"
+					  chart-click="onClick" width="522" height="250">
+					</canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>
+<div class="row">
+
+	<div class="col-lg-6 col-sm-12 ng-scope" id="doughnut-chart">
+		<div class="panel panel-default">
+			<div class="panel-heading">Horários mais acessados</div>
+			<div class="panel-body">
+				<div class="chart-container">
+					<canvas id="line" class="chart chart-line" chart-data="data1" chart-colours="colours1"
+						chart-labels="labels1" chart-legend="true" chart-series="series1"
+						chart-click="onClick" width="522" height="250">
+					</canvas> 
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+
+<!-- <md-grid-list
+        md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
+        md-row-height-gt-md="1:1" md-row-height="2:2"
+        md-gutter="12px" md-gutter-gt-sm="8px" >
+
+    <md-grid-tile class="gray"
+        md-rowspan="2" md-colspan="3" md-colspan-sm="1">
+        
+        <canvas id="line" class="chart chart-line" chart-data="data" chart-colours="colours"
+		  chart-labels="labels" chart-legend="true" chart-series="series"
+		  chart-click="onClick" width="522" height="250">
+		</canvas> 
+    </md-grid-tile>
+    
+    <md-grid-tile class="gray"
+        md-rowspan="2" md-colspan="3" md-colspan-sm="1">
+        
+        <canvas id="line" class="chart chart-line" chart-data="data1" chart-colours="colours1"
+		  chart-labels="labels1" chart-legend="true" chart-series="series1"
+		  chart-click="onClick" width="522" height="250">
+		</canvas> 
+    </md-grid-tile>
+    
+    <md-grid-tile class="blue"
+        md-rowspan="2">
+        <canvas id="doughnut" class="chart chart-doughnut" height="300" width="300"
+		  chart-data="data3" chart-labels="labels3">
+		</canvas> 
+    </md-grid-tile>
+    
+    <md-grid-tile class="red"
+        md-rowspan="2" md-colspan="2" md-colspan-sm="1">
+        <canvas id="radar" class="chart chart-radar" height="300" width="300"
+		  chart-data="data4" chart-labels="labels4">
+		</canvas> 
+    </md-grid-tile>
+    
+    <md-grid-tile class="green"
+        md-rowspan="2" >
+        <canvas id="pie" class="chart chart-pie"
+		  chart-data="data5" chart-labels="labels5">
+		</canvas>
+    </md-grid-tile>
+  </md-grid-list>
+
+<md-grid-list
+        md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
+        md-row-height-gt-md="1:1" md-row-height="2:2"
+        md-gutter="12px" md-gutter-gt-sm="8px" >
+
+    <md-grid-tile class="gray"
+        md-rowspan="2" md-colspan="2" md-colspan-sm="1">
+        
+<canvas id="base" class="chart-base" chart-type="type"
+  chart-data="data2" chart-labels="labels2" chart-legend="true">
+</canvas> 
+    </md-grid-tile>
+</md-grid-list> -->

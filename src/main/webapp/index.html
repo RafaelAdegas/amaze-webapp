@@ -4,6 +4,7 @@
 	<title>Zoone - Contextualizando</title>
 
 	<link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css" />
+	<link rel="stylesheet" href="bower_components/angular-chart.js/angular-chart.min.css" />
 	<link href="bower_components/angular-material-data-table/dist/md-data-table.min.css" rel="stylesheet" type="text/css"/>
 	
 	<!-- CUSTOM CSS's -->
@@ -30,8 +31,8 @@
         <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2 custom-md-sidenav" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" ng-show="user!==undefined">
 			
 			<!-- btn dashboard -->
-				<md-button class="md-menu-button" ng-click="redirect('/dashboard'); menuSelected='dashboard'" ng-disabled="menuSelected=='dashboard'">
-					<span class="custom-text-left">Dashboard</span>
+				<md-button class="md-menu-button" ng-click="redirect('/home'); menuSelected='home'" ng-disabled="menuSelected=='home'">
+					<span class="custom-text-left">Home</span>
 				</md-button>
 			
 			<!-- btn establishment 
@@ -68,9 +69,8 @@
 	<script src="bower_components/angular/angular-messages-1.4.4.min.js"></script>
     <script src="bower_components/angular-aria/angular-aria.min.js"></script>
     <script src="bower_components/angular-material/angular-material.min.js"></script>
-    <script src="bower_components/morris.js/morris.min.js"></script>
-    <script src="bower_components/raphael/raphael-min.js"></script>
-    <script src="bower_components/angular-morris-chart/src/angular-morris-chart.min.js"></script>
+    <script src="bower_components/Chart.js/Chart.min.js"></script>
+    <script src="bower_components/angular-chart.js/angular-chart.min.js"></script>
 	
 	<script type="text/javascript" src="bower_components/angular-material-data-table/dist/md-data-table.min.js"></script>
 	

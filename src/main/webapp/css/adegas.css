@@ -104,6 +104,57 @@ md-switch.md-checked .md-bar {
 	background-color: #4EB1BA;
 }
 
+.md-dash-card {
+	
+}
+
+.panel {
+	margin-bottom: 20px;
+	background-color: #fff;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.panel-default {
+	border-color: #ddd;
+}
+.panel-default > .panel-heading {
+	color: #333;
+	background-color: #f5f5f5;
+	border-color: #ddd;
+}
+.panel-heading {
+	font-weight: bold;
+	padding: 10px 15px;
+	border-bottom: 1px solid transparent;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+.panel-body {
+	padding: 15px;
+}
+
+.col-lg-6, .col-sm-12 {
+	position: relative;
+	min-height: 1px;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+@media (min-width: 768px) {
+	.col-sm-12 {
+		width: 100%;
+		float: left;
+	}
+}
+
+@media (min-width: 1200px) {
+	.col-lg-6 {
+		width: 40%;
+		float: left;
+	}
+}
+
 @media (max-width: 599px) {
 	[layout-sm] {
 		display: -webkit-inline-box;
